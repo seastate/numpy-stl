@@ -55,10 +55,12 @@ print('\n\nIdealized geometry calculations:')
 vol = 4/3*math.pi*maxx*maxy*maxz
 print('vol = ',vol)
 print('CoG = ',np.zeros(3))
+print('Total area = ',s.areas.sum())
 
 print('\n\nResults from an octave code using the same stl file:')
 print('total_volume = ',2.542435320277415e-14)
 print('C_gravity = ',np.asarray([-2.509405046241381e-08,
                                  6.410343034598542e-14,
                                  -1.101317119584843e-21]))
+print('total_volume = ',4.911965863450262e-09)
 
