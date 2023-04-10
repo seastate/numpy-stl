@@ -118,10 +118,10 @@ def get_mass_props6(mesh=None):
     counts = count_intersections(mesh=mesh)
     evens = counts % 2==0
     odds = counts % 2!=0
-    s = np.zeros(counts.shape)
-    s[odds] = -1
-    s[evens] = 1
-    normals *= s.reshape([s.shape[0],1]).repeat(3,axis=1)
+    S = np.zeros(counts.shape)
+    S[odds] = -1
+    S[evens] = 1
+    normals *= S.reshape([S.shape[0],1]).repeat(3,axis=1)
     areas = mesh.areas
     total_area = areas.sum()
     centroids = mesh.centroids
@@ -129,7 +129,7 @@ def get_mass_props6(mesh=None):
     total_volume = volumes.sum()
     tet_centroids = 0.75 * centroids
     volume_center = (tet_centroids*volumes.repeat(3,axis=1)).sum(axis=0)/total_volume
-    return total_area,total_volume,volume_center,counts,s
+    return total_area,total_volume,volume_center,counts,S
 
 
 s = mesh.Mesh.from_file('plankter.stl')
@@ -200,7 +200,7 @@ print("total_area = {0}".format(total_area))
 
 # Calculate volume from stl mesh with get_mass_props6 function
 print('\n\nget_mass_props6 calculations:')
-total_area,total_volume,volume_center,counts,s = get_mass_props6(mesh=s)
+total_area,total_volume,volume_center,counts,S = get_mass_props6(mesh=s)
 print("\ntotal_volume = {0}".format(total_volume))
 print("volume_center = {0}".format(volume_center))
 print("total_area = {0}".format(total_area))
